@@ -11,4 +11,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN docker-php-ext-install pdo pdo_mysql
 
-WORkDIR /var/www
+RUN pecl install xdebug \
+    && docker-php-ext-install xdebug
+
+COPY ./xdebug.ini "${PHP_INI_DIR}/conf.d"
+
+WORkDIR /var/www/
